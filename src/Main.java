@@ -43,13 +43,45 @@ public class Main {
                     case 1:
                         x = gauss(x);
                         displayMat(x);
+                        double[] hasilGauss = new double[x.length];
+                        hasilGauss = solveGauss(x);
+                        for(int i=0;i<a;i++){
+                            System.out.println("x"+(i+1)+" = "+hasilGauss[i]);
+                        }
+                        System.out.println("ketik apa saja untuk kembali ke menu");
+                        String abc = input.next();
                         break;
                     case 2:
                         x = jordan(x);
                         displayMat(x);
+                        double[] hasilJordan = new double[x.length];
+                        hasilJordan = solveGaussJordan(x);
+                        for(int i=0;i<a;i++){
+                            System.out.println("x"+(i+1)+" = "+hasilJordan[i]);
+                        }
+                        System.out.println("ketik apa saja untuk kembali ke menu");
+                        String abcd = input.next();
+                        break;
+                    case 3:
+                        System.out.println("input b : ");
+                        double[][] bb = new double[x.length][1];
+                        for(int i=0;i<x.length;i++){
+                            bb[i][0] = input.nextDouble();
+                        }
+                        double[][] hasil = new double[x.length][1];
+
+                        hasil = solInv(x, bb);
+
+                        for(int i=0;i<x.length;i++){
+                            System.out.println("x"+(i+1)+" = "+ hasil[i][0]);
+                        }
+                        System.out.println("ketik apa saja untuk kembali ke menu");
+                        String abcde = input.next();
                         break;
                     case 4: 
                         cramer(x);
+                        System.out.println("ketik apa saja untuk kembali ke menu");
+                        String abcdef = input.next();
                         break;
                 }
                 main(args);
@@ -269,6 +301,24 @@ public class Main {
             return false;
         }
     
+    }
+    public static double[][] multiplyMatrix(double[][] m1, double[][] m2){
+        int i,j,k;
+        double[][] mt = new double[m1.length][m2[0].length];
+        for (i=0;i<m1.length;i++){
+            for (j=0;j<m2[0].length;j++){
+                mt[i][j] = 0;
+            }    
+        }
+    
+        for (i=0;i<m1.length;i++){
+            for (j=0;j<m2[0].length;j++){
+                for (k=0;k<m2.length;k++){
+                    mt[i][j] += m1[i][k]*m2[k][j];
+                }
+            }
+        }
+        return mt;
     }
 
     //==================FUNGSI UTAMA MATRIX=========================//
@@ -613,17 +663,45 @@ public class Main {
               n[i] = m[oneInRow(m, i)][m[0].length - 1];
             }
             return n;
-          }
-          public static int oneInRow(double[][]m, int i){
-                int found = 0;
-                for(int j=0;j<m[0].length;j++){
-                    if(m[i][j]==1){
-                        found = j;
-                        break;
-                    }
+        }
+        public static double[][] solInv(double[][] m, double[][] b){
+            double[][] matInv = new double[m.length][m[0].length];
+            double[][] hasil = new double[m.length][m[0].length];
+    
+            matInv = invers(m);
+            displayMat(matInv);
+            hasil = multiplyMatrix(matInv, b);
+            return hasil;
+        }
+
+        public static int oneInRow(double[][]m, int i){
+            int found = 0;
+            for(int j=0;j<m[0].length;j++){
+                if(m[i][j]==1){
+                    found = j;
+                    break;
                 }
-                return found;
             }
+            return found;
+        }
+
+        public static double[] solveGauss(double[][] m) {
+            // Menyelesaikan SPL kasus 1 (rows = cols -1)
+    
+            int row = m.length;
+            int col = m[0].length;
+            double[] hasil = new double[col - 1];
+            for (int i = row - 1; i >= 0; i--) {
+                hasil[i] = m[i][col - 1];
+                for (int j = (col - 2); j > i; j--) {
+                    hasil[i] -= m[i][j] * hasil[j];
+                }
+    
+            }
+    
+            return hasil;
+        }
+
         public static void pol(double[][] n, int x, double y) {
             double[][] m = new double[n.length][x + 2];
             double[][] o = new double[n.length][x + 2];
