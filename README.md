@@ -31,9 +31,8 @@ Tugas Besar 1 Aljabar Linear dan Geometri adalah sebuah proyek membuat kalkulato
     </tr>
 </table>
 
-## Cara menggunakan
-1. 
-2.
-3.
-4.
-5.
+## Cara menggunakan kalkulator matriks
+1. Buka terminal lalu ubah directory ke src
+2. Ketik javac -d ../bin Main.java
+3. Ketik java -cp ../bin Main
+4. Program siap digunakan
