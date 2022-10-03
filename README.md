@@ -3,7 +3,19 @@
 Tugas Besar 1 Aljabar Linear dan Geometri adalah sebuah proyek membuat kalkulator matriks untuk menghitung sistem persamaan linier, determinan, matriks balikan, interpolasi polinom, interpolasi bicubic, dan regresi linier berganda.
 
 ## Struktur file
-
+📦Algeo01-21010
+ ┣ 📂bin
+ ┃ ┗ 📜Main.class
+ ┣ 📂doc
+ ┃ ┗ 📜Algeo01-21010.pdf
+ ┣ 📂src
+ ┃ ┗ 📜Main.java
+ ┣ 📂test
+ ┃ ┣ 📜interpolinom.txt
+ ┃ ┣ 📜regresi.txt
+ ┃ ┣ 📜testcase_3a.txt
+ ┃ ┗ 📜testcase_4b.txt
+ ┗ 📜README.md
 ## Anggota kelompok 43
 <table>
     <tr>

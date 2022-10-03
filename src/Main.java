@@ -173,6 +173,9 @@ public class Main {
                 main(args);
                 break;
             case 5:
+                System.out.println("Maaf bikubik belum jadi, coba menu lain");
+                main(args);
+                break;
 
             case 6:
                 System.out.println("REGRESI LINEAR BERGANDA");
