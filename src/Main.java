@@ -21,7 +21,7 @@ public class Main {
         System.out.println("7. Keluar");
         System.out.println("");
 
-        System.out.println("Pilih :");
+        System.out.print("Pilih Menu:");
         op = input.nextInt();
 
         switch (op) {
@@ -32,9 +32,9 @@ public class Main {
                 System.out.println("4. Kaidah Cramer");
                 int opp = input.nextInt();
 
-                System.out.println("berapa baris?");
+                System.out.print("berapa baris : ");
                 a = input.nextInt();
-                System.out.println("berapa kolom?");
+                System.out.print("berapa kolom : ");
                 b = input.nextInt();
                 double x[][] = new double[a][b];
                 System.out.println("Masukkan matriks");
@@ -69,9 +69,9 @@ public class Main {
                             break;
                         }
                     case 2:
-                    System.out.println("berapa baris?");
+                    System.out.print("berapa baris : ");
                     a = input.nextInt();
-                    System.out.println("berapa kolom?");
+                    System.out.print("berapa kolom : ");
                     b = input.nextInt();
                     double y[][] = new double[a][b];
                     double temp[][] = new double[a][b];
@@ -101,9 +101,9 @@ public class Main {
                             break;
                         }
                     case 2:
-                    System.out.println("berapa baris?");
+                    System.out.print("berapa baris : ");
                     a = input.nextInt();
-                    System.out.println("berapa kolom?");
+                    System.out.print("berapa kolom : ");
                     b = input.nextInt();
                     double z[][] = new double[a][b];
                     // double y[][] = new double[a][b];
@@ -119,11 +119,11 @@ public class Main {
             break;
             case 4:
                 double c;            
-                System.out.println("berapa titik?");
+                System.out.print("berapa titik :");
                 a = input.nextInt();
                 // System.out.println("polinom berapa??");
                 // b = input.nextInt();
-                System.out.println("nilai x di berapa???");
+                System.out.print("nilai x di berapa : ");
                 c = input.nextDouble();
                 
                 double[][] in = new double[a][2];
@@ -141,9 +141,9 @@ public class Main {
             case 5:
             case 6:
                 System.out.println("REGRESI LINEAR BERGANDA");
-                System.out.println("berapa jumlah baris sampel?");
+                System.out.println("Berapa jumlah baris sampel?");
                 row = input.nextInt();
-                System.out.println("berapa kolom ( x dan y ) ?");
+                System.out.println("Berapa kolom ( x dan y ) ?");
                 col = input.nextInt();
             
                 double M[][] = new double[row][col];
@@ -312,74 +312,8 @@ public class Main {
 
 
     //DETERMINAN
-    public static double determinan(double[][] m)
-    {
-       double ans = 1;
-       // matriks penyebut
-       double penyebut[][] = new double[m.length][m[0].length];
-       for ( int i = 0; i < m.length; i++)
-       {
-          for ( int j = 0; j < m[0].length; j++)
-          {
-             penyebut[i][j] = 1;
-          }
-       }
-    
-       // OBE matriks segitiga
-       for ( int i = 0; i < m.length; i++)
-       {
-          if (m[i][i] == 0)
-          {
-             int j = i+1;
-             while ( j < m.length)
-             {
-                if (m[j][i] != 0)
-                {
-                   int temp = (int)m[j][i];
-                   m[j][i] = m[i][i];
-                   m[i][i] = temp;
-    
-                   j++;
-                   break;
-                }
-             }
-    
-             if ( j >= m.length)
-             {
-                return 0;
-             }
-             ans *= -1;
-          }
-          // pengurangan i,i hingga bernilai 0
-          for ( int j = i+1; j < m.length; j++)
-          {
-             int k_pemb = (int)m[j][i];
-             int k_peny = (int)m[i][i];
-             m[j][i] = 0;
-             penyebut[j][i] = 1;
-    
-             for (int k = i+1; k < m[0].length; k++)
-             {
-                int dec_pemb = k_pemb * (int)m[i][k];
-                int dec_peny = k_peny * (int)penyebut[i][k];
-    
-                int x = (int)penyebut[j][k], y = dec_peny;
-    
-                int kpk = x*y;
-    
-                m[j][k] = m[j][k]*(kpk/x) - dec_pemb*(kpk/y);;
-    
-                penyebut[j][k] = kpk;
-             }
-             
-          }
-    
-          ans *= (m[i][i]*1.0)/(penyebut[i][i]*1.0);
-       }
-       return ans;
-    }
-
-    public static double determinan2(double[][] m) {
+    //metode segitiga bawah
+    public static double determinan1(double[][] m) {
         int row,col;
         double count=1;
         row = m.length;
@@ -403,6 +337,39 @@ public class Main {
         return count;
       }
 
+        // Metode perkalian baris kofaktor
+      public static double determinan2(double[][] m){
+        double det=0;
+        int i,sign=1;
+        if (m.length == 1 && m[0].length == 1){
+            return(m[0][0]);
+        }
+        for (i=0;i<m[0].length;i++){
+            det += m[0][i]*sign*determinan2(kofaktor(m,0,i));
+            sign*=-1;
+        }
+        return det;
+        // return hitung(m);
+    }
+
+    public static double[][] kofaktor(double[][] m, int row, int col){
+        int i,j,ikof=0,jkof=0;
+        double[][] kof = new double[m.length-1][m[0].length-1];
+        for (i=0;i<row;i++) {
+            for (j=0;j<col;j++) {
+                if(i!=row && j!=col){
+                    kof[ikof][jkof] = m[i][j];
+                    if (jkof==kof.length){
+                        ikof+=1;
+                        jkof=0;
+                    }else{
+                        jkof+=1;
+                    }
+                }
+            }
+        }
+        return kof;
+    }
     // METODE CRAMER
     public static void cramer(double[][] m) {
         // defisini variable
@@ -421,7 +388,7 @@ public class Main {
             }
         }
 
-        double detA = determinan(mCopy);
+        double detA = determinan1(mCopy);
         System.out.println("determinan = " + detA);
         System.out.println("");
 
@@ -454,7 +421,7 @@ public class Main {
 
             // System.out.println(det(mCopy));
             //menghitung deterinan dari matriks yang sudah dimasukkkan hasil dari spl
-            tempD = determinan(mCopy);
+            tempD = determinan1(mCopy);
             // System.out.println(tempD);
             // System.out.println(detA);
             //membagi determinan setiap matriks yang diganti dengan determinan asli
@@ -847,7 +814,7 @@ public class Main {
                 }
                 writer.println("");
             }
-            double det = determinan(m);
+            double det = determinan1(m);
             writer.println(det);
             
             writer.close();
