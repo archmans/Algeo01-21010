@@ -111,10 +111,12 @@ public class Main {
                     temp = copyMat(y, temp);
                     displayMat(y);
                    
-                    double det = determinan2(temp);
+                    double det = determinan1(temp);
                     System.out.println("determinan = " + det);
                     matrixToFileDet(y);
                 }
+                System.out.println("ketik apa saja untuk kembali ke menu");
+                String abcdefg = input.next();
                 main(args);
                 break;        
             case 3:
@@ -147,6 +149,8 @@ public class Main {
                     matrixToFileInv(invers(z));
                     break;
                 }
+                System.out.println("ketik apa saja untuk kembali ke menu");
+                String abcdef = input.next();
                 main(args);
                 break;
             case 4:
@@ -164,9 +168,12 @@ public class Main {
                     }
                 }
                 pol(in, a-1, c);
+                System.out.println("ketik apa saja untuk kembali ke menu");
+                String abcdefgh = input.next();
                 main(args);
                 break;
             case 5:
+
             case 6:
                 System.out.println("REGRESI LINEAR BERGANDA");
                 System.out.println("Berapa jumlah baris sampel?");
@@ -185,11 +192,14 @@ public class Main {
                     inputx[i]=input.nextDouble();
                 }
                 regresi(M, inputx, row, col);
+                System.out.println("ketik apa saja untuk kembali ke menu");
+                String abcdefghi = input.next();
                 main(args);
                 break;
             case 7:
                 System.out.println("Terimakasih sudah menggunakan jasa kami");
                 System.out.println("Sampai bertemu lagii");
+                System.exit(0);
                 break;
                 
             default:
