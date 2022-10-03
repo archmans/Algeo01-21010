@@ -8,7 +8,7 @@ import java.io.UnsupportedEncodingException;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
-        int a, b, op, row, col;
+        int a, b, op;
         Scanner input = new Scanner(System.in);
         System.out.println("===========MENU===========");
         System.out.println("1. Sistem Persamaan Linear");
@@ -169,9 +169,9 @@ public class Main {
             case 6:
                 System.out.println("REGRESI LINEAR BERGANDA");
                 System.out.println("Berapa jumlah baris sampel?");
-                row = input.nextInt();
+                int row = input.nextInt();
                 System.out.println("Berapa kolom ( x dan y ) ?");
-                col = input.nextInt();
+                int col = input.nextInt();
             
                 double M[][] = new double[row][col];
                 System.out.println("Masukkan input");
