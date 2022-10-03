@@ -64,8 +64,6 @@ public class Main {
                             System.out.println(determinan2(d));
                             break;
                         } catch (FileNotFoundException e) {
-                            // TODO Auto-generated catch block
-                            // e.printStackTrace();
                             break;
                         }
                     case 2:
@@ -79,7 +77,7 @@ public class Main {
                     y = inputMat(y, a, b);
                     temp = copyMat(y, temp);
                     displayMat(y);
-                    // displayMat(temp);
+                   
                     double det = determinan2(temp);
                     System.out.println("determinan = " + det);
                     matrixToFileDet(y);
@@ -106,7 +104,6 @@ public class Main {
                     System.out.print("berapa kolom : ");
                     b = input.nextInt();
                     double z[][] = new double[a][b];
-                    // double y[][] = new double[a][b];
                     
                     System.out.println("Masukkan matriks");
                     z = inputMat(z, a, b);
@@ -121,15 +118,10 @@ public class Main {
                 double c;            
                 System.out.print("berapa titik :");
                 a = input.nextInt();
-                // System.out.println("polinom berapa??");
-                // b = input.nextInt();
                 System.out.print("nilai x di berapa : ");
                 c = input.nextDouble();
                 
                 double[][] in = new double[a][2];
-                // double[][] x= new double[a][b+1];
-                // double[] jawaban = new double[a];
-                
                 
                 for(int i=0;i<in.length;i++){
                     for(int j=0;j<in[0].length;j++){
@@ -237,7 +229,6 @@ public class Main {
         
     }
 
-
     public static boolean isSquare(double[][] m){
         int row,col;
         row = m.length;
@@ -270,14 +261,6 @@ public class Main {
         }
     
     }
-
-
-
-
-
-
-
-
 
     //==================FUNGSI UTAMA MATRIX=========================//
 
@@ -386,22 +369,12 @@ public class Main {
             for(int k=0;k<mCopy.length;k++){
                 mCopy[k][j] = y[k];
             }
-            // System.out.println("Berubah");
-            // displayMat(mCopy);
-
-
-            // System.out.println(det(mCopy));
+    
             //menghitung deterinan dari matriks yang sudah dimasukkkan hasil dari spl
             tempD = determinan1(mCopy);
-            // System.out.println(tempD);
-            // System.out.println(detA);
+
             //membagi determinan setiap matriks yang diganti dengan determinan asli
             System.out.println("x" + (j+1) +"= "+tempD/detA);
-            // System.out.println("");
-
-            // System.out.println("Balik lagi");
-            // displayMat(mCopy);
-            // System.out.println("");
         }
     }
 
@@ -522,8 +495,6 @@ public class Main {
             }
         }
 
-
-       
         return m;
     }
     protected static boolean isZero(double x) {
@@ -532,7 +503,6 @@ public class Main {
     }
     public static boolean isAllZero(double[][] matrix, int pivotCol){
         // Mengembalikan true jika suatu kolom semua bernilai 0 elemennya
-
         boolean allZero = true;
         for (int i = 0; i < matrix.length; i++){
             if (!isZero(matrix[i][pivotCol])){
@@ -563,7 +533,6 @@ public class Main {
         double[][] gbIden = new double[row][2 * col];
         double y[][] = new double[row][col];
         double z[][] = new double[row][col];
-        // double[][] temp = new double[row][2*col];
         y = createIdentitas(row, col);
     
         for (int i = 0; i < row; i++) {
@@ -587,10 +556,8 @@ public class Main {
     
         gbIden = jordan(gbIden);
     
-        // temp = gbIden;
         for (int i = 0; i < row; i++) {
           for (int j = 0; j < gbIden[0].length; j++) {
-            // System.out.println(j);
             if (j >= gbIden[0].length / 2) {
               z[i][j - z.length] = gbIden[i][j];
             }
@@ -621,7 +588,6 @@ public class Main {
                     }
                 }
             }
-            // System.out.println(Arrays.deepToString(numArray));
             return numArray;
         }
     
@@ -650,8 +616,6 @@ public class Main {
                 return found;
             }
         public static void pol(double[][] n, int x, double y) {
-            // double[][] x = new double[4][j+1];
-            // double[][] n = {{8,2.0794},{9,2.1972},{9.5,2.2513}};
             double[][] m = new double[n.length][x + 2];
             double[][] o = new double[n.length][x + 2];
             double[] jawaban = new double[n.length];
@@ -659,7 +623,6 @@ public class Main {
             double hasil = 0;
         
             int row = n.length;
-            // int col = n[0].length;
             for (int i = 0; i < row; i++) {
               for (int j = 0; j <= x + 1; j++) {
                 if (j == x + 1) {
@@ -680,12 +643,10 @@ public class Main {
         
             for (int i = 0; i < jawaban.length; i++) {
               jaw[i] = Math.pow(y, i);
-              // System.out.println(jaw[i]);
             }
             System.out.println("");
             for (int i = 0; i < jawaban.length; i++) {
               hasil += jawaban[i] * jaw[i];
-              // System.out.println(hasil);
             }
         
             System.out.print("f(x) = ");
@@ -697,14 +658,9 @@ public class Main {
               }
             }
             System.out.printf("\nf(%.2f) = %.5f", y, hasil);
-
-
-            
-        
-            // return m;
-        
           }
-    //REGRESI LINEAR BERGANDA
+
+        //REGRESI LINEAR BERGANDA
         public static void regresi(double[][] M, double[] inputx, int row, int col)
         {
         int i, j, l;
@@ -770,7 +726,7 @@ public class Main {
         System.out.println("Hasil regresi");
         System.out.println(sum);
         }
-          public static void matrixToFileDet (double[][] m) throws FileNotFoundException, UnsupportedEncodingException{
+    public static void matrixToFileDet (double[][] m) throws FileNotFoundException, UnsupportedEncodingException{
             System.out.println("Masukkan nama file: ");
             Scanner input = new Scanner(System.in);
             String namaFile = input.next();
@@ -804,10 +760,7 @@ public class Main {
                 }
             }
             writer.println("");
-        }
-        // double[][] inv = invers(m);
-        // writer.println(inv);
-        
+        }        
         writer.close();
         }
 }
