@@ -487,38 +487,36 @@ public class Main {
         return m;
     }
     // GAUSS JORDAN
-    public static double[][] jordan(double[][] m) {
+    public static double[][] jordan(double[][] m) 
+    {
         m = gauss(m);
-        int row,col;
+        int row,col,i,j,k;
         row = m.length;
         col = m[0].length;
+
         if(col<=row){
-            for(int i=row-1;i>=1;i--){
-                for(int j=i-1;j>=0;j--){
+            for(i=row-1; i>=1; i--){
+                for(j=i-1; j>=0; j--){
                     double c = m[j][i];
-                    for(int k=row-1;k>=0;k--){
+                    for(k=row-1; k>=0; k--){
                         m[j][k] = m[j][k]-(m[i][k]*c);
                     }
                 }
             }
         }else{
             int pivotCol = 0;
-            for (int k = 0; k < row; k++) {
-                //jika sudah sampai kolom terakhir maka hentikan proses
+            for (k = 0; k < row; k++) {
                 if (pivotCol == col-1){
                     break;
                 }
-                //cek apakah kolom bernilai 0
-                //jika 0 maka pivot bergeser ke kolom sebelah kanan-nya
                 while (isAllZero(m, pivotCol) && (pivotCol < col)){
                     pivotCol++;
                 }
                 double pivot = m[k][pivotCol];
-                /* cek apakah pivot = 0, jika 0 maka swap dengan yang tidak 0 */
                 if (isZero(pivot)) {
-                    for (int i = k + 1; i < row; i++) {
+                    for (i = k+1; i<row; i++) {
                         if (!isZero(m[i][pivotCol])) {
-                            for (int j = 0; j < col; j++) {
+                            for (j=0; j<col; j++) {
                                 double temp = m[k][j];
                                 m[k][j] = m[i][j];
                                 m[i][j] = temp;
@@ -527,32 +525,26 @@ public class Main {
                         }
                     }
                 }
-                // melakukan pembagian pada baris pivot
                 pivot = m[k][pivotCol];
                 if (isZero(pivot)) {
                     continue;
                 } else {
-                    for (int j = pivotCol; j < col; j++) {
+                    for (j = pivotCol; j<col; j++) {
                         m[k][j] = m[k][j] / pivot;
                     }
-
-                    // melakukan eliminasi pada baris bawah dan atasnya agar bernilai = 0
-                    for (int i = 0; i < row; i++) {
+                    for (i = 0; i<row; i++) {
                         if ((i == k) || m[i][pivotCol] == 0) {
                             continue;
                         }
-                        double factor = m[i][pivotCol];
-                        // System.out.println("ini faktornya "+factor);
-                        for (int j = pivotCol; j < col; j++) {
-                            m[i][j] = (m[i][j] - (factor * m[k][j]));
+                        double faktor = m[i][pivotCol];
+                        for (j = pivotCol; j < col; j++) {
+                            m[i][j] = (m[i][j] - (faktor * m[k][j]));
                         }
                     }
                 }
                 pivotCol++;
-
             }
         }
-
         return m;
     }
     protected static boolean isZero(double x) {
@@ -560,7 +552,6 @@ public class Main {
         return ((x < epsilon) && (x > -epsilon));
     }
     public static boolean isAllZero(double[][] matrix, int pivotCol){
-        // Mengembalikan true jika suatu kolom semua bernilai 0 elemennya
         boolean allZero = true;
         for (int i = 0; i < matrix.length; i++){
             if (!isZero(matrix[i][pivotCol])){
@@ -850,4 +841,3 @@ public class Main {
         writer.close();
         }
 }
-//tes
