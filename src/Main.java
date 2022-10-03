@@ -10,6 +10,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
         int a, b, op;
         Scanner input = new Scanner(System.in);
+        System.out.println("\n\n");
         System.out.println("===========MENU===========");
         System.out.println("1. Sistem Persamaan Linear");
         System.out.println("2. Determinan");
