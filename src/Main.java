@@ -3,7 +3,6 @@ import java.awt.FileDialog;
 import java.awt.Frame;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
