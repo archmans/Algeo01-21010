@@ -52,6 +52,7 @@ public class Main {
                         cramer(x);
                         break;
                 }
+                main(args);
                 break;
             case 2:
                 System.out.println("1. Input file");
@@ -81,8 +82,9 @@ public class Main {
                     double det = determinan2(temp);
                     System.out.println("determinan = " + det);
                     matrixToFileDet(y);
-                    }
-                    break;        
+                }
+                main(args);
+                break;        
             case 3:
                 System.out.println("1. Input file");
                 System.out.println("2. Input matriks");
@@ -113,7 +115,8 @@ public class Main {
                     matrixToFileInv(invers(z));
                     break;
                 }
-            break;
+                main(args);
+                break;
             case 4:
                 double c;            
                 System.out.print("berapa titik :");
@@ -129,6 +132,7 @@ public class Main {
                     }
                 }
                 pol(in, a-1, c);
+                main(args);
                 break;
             case 5:
             case 6:
@@ -149,14 +153,19 @@ public class Main {
                     inputx[i]=input.nextDouble();
                 }
                 regresi(M, inputx, row, col);
+                main(args);
                 break;
             case 7:
+                System.out.println("Terimakasih sudah menggunakan jasa kami");
+                System.out.println("Sampai bertemu lagii");
+                break;
                 
-                    
             default:
-                System.out.println("yaiayy");
+                System.out.println("Anda memilih menu yang salah");
+                main(args);
         }
         System.out.println("");
+        
         input.close();
     }
 
