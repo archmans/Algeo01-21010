@@ -9,7 +9,7 @@ import java.io.UnsupportedEncodingException;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
-        int a,b,op;
+        int a, b, op, row, col;
         Scanner input = new Scanner(System.in);
         System.out.println("===========MENU===========");
         System.out.println("1. Sistem Persamaan Linear");
@@ -138,6 +138,27 @@ public class Main {
                 }
                 pol(in, a-1, c);
                 break;
+            case 5:
+            case 6:
+                System.out.println("REGRESI LINEAR BERGANDA");
+                System.out.println("berapa jumlah baris sampel?");
+                row = input.nextInt();
+                System.out.println("berapa kolom ( x dan y ) ?");
+                col = input.nextInt();
+            
+                double M[][] = new double[row][col];
+                System.out.println("Masukkan input");
+                M = inputMat(M, row, col);
+            
+                double inputx[] = new double[col-1];
+                for(int i=0; i<inputx.length; i++)
+                {   
+                    System.out.println("input X");
+                    inputx[i]=input.nextDouble();
+                }
+                regresi(M, inputx, row, col);
+                break;
+            case 7:
                 
                     
             default:
@@ -745,6 +766,72 @@ public class Main {
             // return m;
         
           }
+    //REGRESI LINEAR BERGANDA
+        public static void regresi(double[][] M, double[] inputx, int row, int col)
+    {
+        int i, j, l;
+        displayMat(M);
+        double temp[][] = new double[col][col+1];
+        System.out.println("\n");
+    
+        //baris pertama
+        temp[0][0] = row;
+            for(j=1; j<=col; j++)
+            {
+                for(l=0; l<row; l++)
+                {
+                    temp[0][j] += M[l][j-1];
+                }
+            }
+    
+        //kolom pertama
+        for(i=1; i<=col-1; i++)
+        {
+            for(l=0; l<row; l++)
+            {
+                temp[i][0] += M[l][i-1];
+            }
+        }
+    
+        //sisa
+        for(i=1; i<=col-1; i++)
+        {
+            for(j=1; j<=col; j++)
+            {
+                for(l=0; l<row; l++)
+                {
+                    temp[i][j] += M[l][i-1]*M[l][j-1];
+                }
+            }
+        }
+        displayMat(temp);
+        System.out.println("\n");
+        // jordan matrix temp untuk mendapatkan x0, x1, x3...
+        temp = jordan(temp);
+        displayMat(temp);
+    
+        double reg[] = new double[temp.length];
+        reg = solveGaussJordan(temp);
+        for (i=1; i<reg.length; i++)
+        {
+            reg[i] *= inputx[i-1];
+        }
+        
+        // Hasil x0, x1, x3...
+        for(i=0; i<reg.length; i++)
+        {
+            System.out.println(reg[i]);
+        }
+    
+        // Total hasil regresi yang sudah dikali input x
+        double sum = 0;
+        for (i=0; i<reg.length; i++)
+        {
+            sum += reg[i];
+        }
+        System.out.println("Hasil regresi");
+        System.out.println(sum);
+    }
           public static void matrixToFileDet (double[][] m) throws FileNotFoundException, UnsupportedEncodingException{
             System.out.println("Masukkan nama file: ");
             Scanner input = new Scanner(System.in);
