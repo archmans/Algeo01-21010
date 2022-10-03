@@ -237,35 +237,6 @@ public class Main {
         
     }
 
-    public static double[][] addMatrix(double[][] m1, double[][] m2) {
-        double[][] temp = new double[m1.length][m1[0].length];
-        copyMat(m1, temp);
-        if(m1.length == m2.length && m1[0].length == m2[0].length){
-            for(int i=0;i<m1.length;i++){
-                for(int j=0; j<m1[0].length;j++){
-                    temp[i][j] = m1[i][j] + m2[i][j];
-                }
-            }
-        }else{
-            System.out.println("tidak bisa ditambah");
-        }
-        return temp;
-    }
-
-    public static double[][] substractMatrix(double[][] m1, double[][] m2) {
-        double[][] temp = new double[m1.length][m1[0].length];
-        copyMat(m1, temp);
-        if(m1.length == m2.length && m1[0].length == m2[0].length){
-            for(int i=0;i<m1.length;i++){
-                for(int j=0; j<m1[0].length;j++){
-                    temp[i][j] = m1[i][j] - m2[i][j];
-                }
-            }
-        }else{
-            System.out.println("tidak bisa ditambah");
-        }
-        return temp;
-    }
 
     public static boolean isSquare(double[][] m){
         int row,col;
@@ -735,7 +706,7 @@ public class Main {
           }
     //REGRESI LINEAR BERGANDA
         public static void regresi(double[][] M, double[] inputx, int row, int col)
-    {
+        {
         int i, j, l;
         displayMat(M);
         double temp[][] = new double[col][col+1];
@@ -798,7 +769,7 @@ public class Main {
         }
         System.out.println("Hasil regresi");
         System.out.println(sum);
-    }
+        }
           public static void matrixToFileDet (double[][] m) throws FileNotFoundException, UnsupportedEncodingException{
             System.out.println("Masukkan nama file: ");
             Scanner input = new Scanner(System.in);
@@ -818,7 +789,7 @@ public class Main {
             writer.println(det);
             
             writer.close();
-    }
+        }
     public static void matrixToFileInv (double[][] m) throws FileNotFoundException, UnsupportedEncodingException{
         System.out.println("Masukkan nama file: ");
         Scanner input = new Scanner(System.in);
@@ -838,5 +809,5 @@ public class Main {
         // writer.println(inv);
         
         writer.close();
-}
+        }
 }
